@@ -6,7 +6,9 @@ let boardX = 150;
 let boardY = 360;
 let boardWidth = 90;
 let boardHeight = 14;
+
 let cols = 8;
+let rows = 3;
 let brickWidth = 45;
 let brickHeight = 18;
 let brickPadding = 5;
@@ -16,23 +18,62 @@ let bricks = [];
 
 function setup() {
     createCanvas(420, 400);
-    for (let i = 0; i < cols; i++) {
-        let bx = i * (brickWidth + brickPadding) + offsetLeft;
-        bricks[i] = { x: bx, y: offsetTop, alive: true };
+    
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            let bx = c * (brickWidth + brickPadding) + offsetLeft;
+            let by = r * (brickHeight + brickPadding) + offsetTop;
+            bricks.push({ x: bx, y: by, alive: true, row: r });
+        }
     }
 }
 
 function draw() {
     background(255, 245, 247);
     noStroke();
-    let allDestroyed = true;
 
-    for (let i = 0; i < cols; i++) {
+    fill(255, 255, 255, 180); 
+    ellipse(40, 40, 3, 3);
+    ellipse(120, 30, 2, 2);
+    ellipse(200, 25, 3, 3);
+    ellipse(30, 140, 2, 2);
+    ellipse(90, 180, 3, 3);
+    ellipse(380, 160, 2, 2);
+    ellipse(250, 300, 3, 3);
+    ellipse(50, 280, 2, 2);
+    ellipse(160, 330, 2, 2);
+
+    fill(255, 235, 150);
+    ellipse(360, 40, 35, 35); 
+    fill(255, 245, 247); 
+    ellipse(370, 37, 32, 32); 
+
+    fill(255, 255, 255, 140); 
+  
+    ellipse(70, 30, 40, 25);
+    ellipse(55, 33, 25, 20);
+    ellipse(85, 33, 25, 20);
+    
+    ellipse(340, 130, 50, 30);
+    ellipse(320, 135, 35, 25);
+    ellipse(360, 135, 35, 25);
+
+    let allDestroyed = true;
+    for (let i = 0; i < bricks.length; i++) {
         let b = bricks[i];
         if (b.alive == true) {
             allDestroyed = false;
-            if (i < 4) { fill(218, 192, 233); } else { fill(255, 182, 193); }
+
+            if (b.row === 0) {
+                fill(218, 192, 233); 
+            } else if (b.row === 1) {
+                fill(255, 182, 193); 
+            } else {
+                fill(244, 143, 177); 
+            }
+
             rect(b.x, b.y, brickWidth, brickHeight, 4);
+
             if (ballX > b.x && ballX < b.x + brickWidth && ballY > b.y && ballY < b.y + brickHeight) {
                 speedY = -speedY;
                 b.alive = false;
@@ -52,6 +93,7 @@ function draw() {
     if (ballY < 7) { speedY = -speedY; }
     if (ballY > boardY - 7 && ballX > boardX && ballX < boardX + boardWidth) { speedY = -speedY; }
 
+    // GAME OVER
     if (ballY > 400) {
         background(255, 235, 238);
         textSize(26);
@@ -61,6 +103,7 @@ function draw() {
         noLoop();
     }
 
+    // Win
     if (allDestroyed == true) {
         background(232, 245, 233);
         textSize(26);
