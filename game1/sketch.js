@@ -93,25 +93,45 @@ function draw() {
     if (ballY < 7) { speedY = -speedY; }
     if (ballY > boardY - 7 && ballX > boardX && ballX < boardX + boardWidth) { speedY = -speedY; }
 
-    // GAME OVER
-    if (ballY > 400) {
-        background(255, 235, 238);
-        textSize(26);
-        fill(233, 30, 99);
-        textAlign(CENTER);
-        text("Oops! Game Over 🎀", 210, 200);
-        noLoop();
-    }
+      // GAME OVER
+if (ballY > 400) {
+    background(255, 235, 238);
 
-    // Win
-    if (allDestroyed == true) {
-        background(232, 245, 233);
-        textSize(26);
-        fill(76, 175, 80);
-        textAlign(CENTER);
-        text("You Win! ✨", 210, 200);
-        noLoop();
-    }
+    textAlign(CENTER);
+
+    textSize(26);
+    fill(233, 30, 99);
+    text("Oops! Game Over 🎀", 210, 170);
+
+    fill(244, 143, 177);
+    rect(145, 220, 130, 45, 10);
+
+    fill(255);
+    textSize(20);
+    text("TRY AGAIN", 210, 250);
+
+    noLoop();
+}
+
+// WIN
+if (allDestroyed == true) {
+    background(232, 245, 233);
+
+    textAlign(CENTER);
+
+    textSize(26);
+    fill(76, 175, 80);
+    text("You Win! ✨", 210, 170);
+
+    fill(129, 199, 132);
+    rect(145, 220, 130, 45, 10);
+
+    fill(255);
+    textSize(20);
+    text("PLAY AGAIN", 210, 250);
+
+    noLoop();
+}
 
     if (keyIsDown(LEFT_ARROW)) { boardX = boardX - 6; }
     if (keyIsDown(RIGHT_ARROW)) { boardX = boardX + 6; }
