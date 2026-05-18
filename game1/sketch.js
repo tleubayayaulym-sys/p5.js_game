@@ -1,10 +1,12 @@
 let ballX = 200;
 let ballY = 220;
+
 let speedX = 2.5;
 let speedY = -2.5;
 
 let boardX = 150;
 let boardY = 360;
+
 let boardWidth = 90;
 let boardHeight = 14;
 
@@ -21,9 +23,9 @@ let offsetTop = 50;
 let bricks = [];
 
 let gameOver = false;
-let gameWin = false;
 
 function setup() {
+
     createCanvas(420, 400);
 
     for (let r = 0; r < rows; r++) {
@@ -48,6 +50,7 @@ function draw() {
     background(255, 245, 247);
 
     noStroke();
+
     fill(255, 255, 255, 180);
 
     ellipse(40, 40, 3, 3);
@@ -65,6 +68,7 @@ function draw() {
 
     fill(255, 245, 247);
     ellipse(370, 37, 32, 32);
+
     fill(255, 255, 255, 140);
 
     ellipse(70, 30, 40, 25);
@@ -121,13 +125,17 @@ function draw() {
 
     ballX = ballX + speedX;
     ballY = ballY + speedY;
+
     if (ballX < 7 || ballX > 413) {
+
         speedX = -speedX;
     }
 
     if (ballY < 7) {
+
         speedY = -speedY;
     }
+
     if (
         ballY > boardY - 7 &&
         ballX > boardX &&
@@ -165,8 +173,6 @@ function draw() {
     // WIN
     if (allDestroyed == true) {
 
-        gameWin = true;
-
         background(232, 245, 233);
 
         textAlign(CENTER);
@@ -174,39 +180,35 @@ function draw() {
         textSize(26);
         fill(76, 175, 80);
 
-        text("You Win! ✨", 210, 170);
-
-        fill(129, 199, 132);
-        rect(145, 220, 130, 45, 10);
-
-        fill(255);
-        textSize(20);
-
-        text("PLAY AGAIN", 210, 250);
+        text("You Win! ✨", 210, 200);
 
         noLoop();
     }
 
     if (keyIsDown(LEFT_ARROW)) {
+
         boardX = boardX - 6;
     }
 
     if (keyIsDown(RIGHT_ARROW)) {
+
         boardX = boardX + 6;
     }
 
     if (boardX < 0) {
+
         boardX = 0;
     }
 
     if (boardX > 420 - boardWidth) {
+
         boardX = 420 - boardWidth;
     }
 }
 
 function mousePressed() {
 
-    if (gameOver || gameWin) {
+    if (gameOver) {
 
         if (
             mouseX > 145 &&
