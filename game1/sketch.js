@@ -137,4 +137,11 @@ if (allDestroyed == true) {
     if (keyIsDown(RIGHT_ARROW)) { boardX = boardX + 6; }
     if (boardX < 0) { boardX = 0; }
     if (boardX > 420 - boardWidth) { boardX = 420 - boardWidth; }
+    function mousePressed() {
+if (mouseX > 145 && mouseX < 275 &&
+        mouseY > 220 && mouseY < 265) {
+ location.reload();
+    }
+}
+
 }
